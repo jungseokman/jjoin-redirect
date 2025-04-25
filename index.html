@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Link Redirect</title>
+    <script>
+        function getDeviceType() {
+            const userAgent = navigator.userAgent;
+            if (/android/i.test(userAgent)) {
+                return 'android';
+            } else if (/iphone|ipad|ipod/i.test(userAgent)) {
+                return 'ios';
+            } else {
+                return 'unknown';
+            }
+        }
+
+        function redirectToStore() {
+            const androidPackageName = 'com.multiversekj.jjoinApp';
+            const androidStoreLink = 'https://play.google.com/store/apps/details?id=' + androidPackageName;
+            const iosAppStoreLink = 'https://apps.apple.com/app/앱 ID예시';
+            const appUrlScheme = '예시'; 
+            const deviceType = getDeviceType();
+            let storeRedirectTimeout;
+
+            // 앱 설치 확인을 위해 URL 스킴으로 리다이렉트 시도
+            window.location.href = appUrlScheme;
+
+            storeRedirectTimeout = setTimeout(() => {
+                if (deviceType === 'android') {
+                    window.location.href = androidStoreLink;
+                } else if (deviceType === 'ios') {
+                    window.location.href = iosAppStoreLink;
+                }
+            }, 1500); 
+            window.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    clearTimeout(storeRedirectTimeout);
+                }
+            });
+        }
+    </script>
+</head>
+<body onload="redirectToStore()">
+    <h1>Redirecting...</h1>
+</body>
+</html>
