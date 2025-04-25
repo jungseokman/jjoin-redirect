@@ -19,12 +19,8 @@
             const androidPackageName = 'com.multiversekj.jjoinApp';
             const androidStoreLink = 'https://play.google.com/store/apps/details?id=' + androidPackageName;
             const iosAppStoreLink = 'https://apps.apple.com/app/앱 ID예시';
-            const appUrlScheme = '예시'; 
             const deviceType = getDeviceType();
             let storeRedirectTimeout;
-
-            // 앱 설치 확인을 위해 URL 스킴으로 리다이렉트 시도
-            window.location.href = appUrlScheme;
 
             storeRedirectTimeout = setTimeout(() => {
                 if (deviceType === 'android') {
